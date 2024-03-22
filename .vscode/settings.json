@@ -2,7 +2,7 @@
     "python.testing.unittestArgs": [
         "-v",
         "-s",
-        "./package_foobar",
+        "./mirror_playlists",
         "-p",
         "test_*.py"
     ],

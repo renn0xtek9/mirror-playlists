@@ -2,7 +2,7 @@
 
 import unittest
 
-from package_foobar.package_foobar.example import return_two
+from mirror_playlists.mirror_playlists.example import return_two
 
 
 class TestReturnTwo(unittest.TestCase):
