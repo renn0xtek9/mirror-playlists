@@ -1,0 +1,50 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+	"name": "Ubuntu",
+	"runArgs": [
+		"--network=host",
+	],
+	"build": {
+		"dockerfile": "Dockerfile",
+		"options": [
+			"--network=host"
+		]
+	},
+	"mounts": [
+		"source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.bash_aliases,target=/home/vscode/.bash_aliases,type=bind,consistency=cached",
+	],
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers/features/python:1": {},
+		"ghcr.io/devcontainers-contrib/features/apt-get-packages:1": {},
+		"ghcr.io/devcontainers-contrib/features/black:2": {},
+		"ghcr.io/devcontainers-contrib/features/coverage-py:2": {},
+		"ghcr.io/devcontainers-contrib/features/pylint:2": {}
+	},
+	"postCreateCommand": {
+		"install": [
+			"scripts/install.sh"
+		]
+	},
+	"postStartCommand": "pre-commit install",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.black-formatter",
+				"ms-python.pylint",
+				"ms-python.python",
+				"ms-python.isort",
+				"ms-python.vscode-pylance",
+				"ms-python.debugpy",
+				"ms-azuretools.vscode-docker",
+				"github.vscode-pull-request-github",
+				"hbenl.vscode-test-explorer",
+			]
+		}
+	},
+	"containerEnv": {
+		"PYTHONPATH": "${localEnv:PYTHONPATH}"
+	}
+}

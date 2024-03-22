@@ -1,0 +1,23 @@
+name: Continuous Integration
+
+on: [pull_request]
+
+jobs:
+  Ubuntu-22-04-pipeline:
+    runs-on: ubuntu-22.04
+    env:
+      PYTHONPATH: ${{ github.workspace }}:/home/vscode/.local/lib/python3.10/site-packages:${{ github.workspace }}/macros/pythonpath
+    steps:
+      - uses: actions/checkout@v1
+      - name: install
+        run: ./scripts/install.sh
+      - name: format python
+        run: black --config pyproject.toml --check ${{ github.workspace }}/package_foobar
+      - name: format python files
+        run: black --config pyproject.toml --check ${{ github.workspace }}/package_foobar
+      - name: pylint macros
+        run: pylint --load-plugins=pylint.extensions.docparams  ${{ github.workspace }}/package_foobar
+      - name: unit-test
+        run: coverage run --source=package_foobar -m unittest discover -v -b -s ${{ github.workspace }}/package_foobar/package_foobar
+      - name: test-coverage
+        run: coverage report -m --omit="/usr/*,/home/runner/.local/*" --fail-under=100
