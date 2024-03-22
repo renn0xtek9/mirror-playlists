@@ -1,4 +1,9 @@
 {
+    "options": {
+        "env": {
+            "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"
+        }
+    },
     "tasks": [
         {
             "label": "Unit-tests",
