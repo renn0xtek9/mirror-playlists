@@ -3,7 +3,7 @@
         {
             "label": "Unit-tests",
             "type": "shell",
-            "command": "coverage run --source=mirror_playlists -m unittest discover -v -b -s mirror_playlists/mirror_playlists"
+            "command": "coverage run --source=mirror_playlists -m unittest discover -v -b -s ."
         },
         {
             "label": "Code coverage",
@@ -21,7 +21,7 @@
         {
             "label": "Pylint check",
             "type": "shell",
-            "command": "pylint --load-plugins=pylint.extensions.docparams  ${workspaceFolder}/pacmirror_playlists/"
+            "command": "pylint --load-plugins=pylint.extensions.docparams ./mirror_playlists/"
         }
     ]
 }
