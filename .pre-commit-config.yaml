@@ -42,7 +42,7 @@ repos:
     hooks:
       - id: pylint
         name: pylint
-        entry: /bin/bash -c "~/.local/bin/pylint --load-plugins=pylint.extensions.docparams/package $*"
+        entry: /bin/bash -c "~/.local/bin/pylint --load-plugins=pylint.extensions.docparams ./mirror_playlists/mirror_playlists $*"
         language: script
         types: [python]
   - repo: https://github.com/PyCQA/isort

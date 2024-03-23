@@ -13,11 +13,9 @@ jobs:
         run: ./scripts/install.sh
       - name: format python
         run: black --config pyproject.toml --check ${{ github.workspace }}/mirror_playlists
-      - name: format python files
-        run: black --config pyproject.toml --check ${{ github.workspace }}/mirror_playlists
-      - name: pylint macros
-        run: pylint --load-plugins=pylint.extensions.docparams  ${{ github.workspace }}/mirror_playlists
+      - name: pylint
+        run: pylint --load-plugins=pylint.extensions.docparams  ${{ github.workspace }}/mirror_playlists/
       - name: unit-test
-        run: coverage run --source=mirror_playlists -m unittest discover -v -b -s ${{ github.workspace }}/mirror_playlists/mirror_playlists
+        run: coverage run --source=mirror_playlists -m unittest discover -v -b -s ${{ github.workspace }}
       - name: test-coverage
         run: coverage report -m --omit="/usr/*,/home/runner/.local/*" --fail-under=100

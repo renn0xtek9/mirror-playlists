@@ -43,8 +43,5 @@
 				"hbenl.vscode-test-explorer",
 			]
 		}
-	},
-	"containerEnv": {
-		"PYTHONPATH": "${localEnv:PYTHONPATH}"
 	}
 }
