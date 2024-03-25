@@ -17,3 +17,5 @@ jobs:
         run: coverage run --source=mirror_playlists -m unittest discover -v -b -s ${{ github.workspace }}
       - name: test-coverage
         run: coverage report -m --omit="/usr/*,/home/runner/.local/*" --fail-under=100
+      - name: test local deployment
+        run: ./scripts/deploy_locally.sh
