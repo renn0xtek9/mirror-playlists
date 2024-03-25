@@ -1,6 +1,7 @@
 """Unit test ofr mirror_playlists"""
 
 import os
+import sys
 import unittest
 from pathlib import Path
 from typing import List
@@ -8,8 +9,8 @@ from unittest.mock import patch
 
 from parameterized import parameterized
 
-from mirror_playlists.mirror_playlists.main import main
-from mirror_playlists.mirror_playlists.mirror_playlists_utils import (
+from .main import main
+from .mirror_playlists_utils import (
     copy_song_file_if_not_existing_and_create_necessary_parent_folder,
     create_destination_file,
     get_all_playlist_files,
@@ -26,28 +27,36 @@ from mirror_playlists.mirror_playlists.mirror_playlists_utils import (
 
 class TestMain(unittest.TestCase):
     def test_main_throws_if_help(self):
-        argv = ["mirror_all_playlist.py", "-h"]
+        sys.argv = ["mirror_all_playlist.py", "-h"]
         with self.assertRaises(SystemExit):
-            main(argv)
+            main()
 
     def test_main_throws_if_destination_not_supplied(self):
-        argv = ["mirror_all_playlist.py", "-m", "foo"]
+        sys.argv = ["mirror_all_playlist.py", "-m", "foo"]
         with self.assertRaises(SystemExit):
-            main(argv)
+            main()
 
     def test_main_throws_if_music_folder_not_supplied(self):
-        argv = ["mirror_all_playlist.py"]
+        sys.argv = ["mirror_all_playlist.py"]
         with self.assertRaises(SystemExit):
-            main(argv)
+            main()
 
     @patch("mirror_playlists.mirror_playlists.main.mirror_all_playlist")
     def test_main_call_mirror_all_playlist_with_correct_arguments(self, mock_mirror_all_playlist):
         mock_mirror_all_playlist.return_value = None
-        argv = ["mirror_all_playlist.py", "-m", "/home/foo/Music", "-p", "/home/foo/Music/Playlists", "-d", "/mnt/bar"]
-        music_folder_path = Path(argv[2])
-        playlist_folder_path = Path(argv[4])
-        destination_folder_path = Path(argv[6])
-        main(argv)
+        sys.argv = [
+            "mirror_all_playlist.py",
+            "-m",
+            "/home/foo/Music",
+            "-p",
+            "/home/foo/Music/Playlists",
+            "-d",
+            "/mnt/bar",
+        ]
+        music_folder_path = Path(sys.argv[2])
+        playlist_folder_path = Path(sys.argv[4])
+        destination_folder_path = Path(sys.argv[6])
+        main()
         mock_mirror_all_playlist.assert_called_once_with(
             music_folder_path, playlist_folder_path, destination_folder_path
         )

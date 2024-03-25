@@ -5,8 +5,6 @@ on: [pull_request]
 jobs:
   Ubuntu-22-04-pipeline:
     runs-on: ubuntu-22.04
-    env:
-      PYTHONPATH: ${{ github.workspace }}:/home/vscode/.local/lib/python3.10/site-packages:${{ github.workspace }}/macros/pythonpath
     steps:
       - uses: actions/checkout@v1
       - name: install
