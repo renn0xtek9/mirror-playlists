@@ -1,9 +1,4 @@
 {
-    "options": {
-        "env": {
-            "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}"
-        }
-    },
     "tasks": [
         {
             "label": "Unit-tests",
@@ -27,6 +22,11 @@
             "label": "Pylint check",
             "type": "shell",
             "command": "pylint --load-plugins=pylint.extensions.docparams ./mirror_playlists/"
+        },
+        {
+            "label": "Deploy locally",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/deploy_locally.sh"
         }
     ]
 }

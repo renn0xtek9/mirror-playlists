@@ -5,8 +5,6 @@ on: [pull_request]
 jobs:
   Ubuntu-22-04-pipeline:
     runs-on: ubuntu-22.04
-    env:
-      PYTHONPATH: ${{ github.workspace }}:/home/vscode/.local/lib/python3.10/site-packages:${{ github.workspace }}/macros/pythonpath
     steps:
       - uses: actions/checkout@v1
       - name: install
@@ -19,3 +17,5 @@ jobs:
         run: coverage run --source=mirror_playlists -m unittest discover -v -b -s ${{ github.workspace }}
       - name: test-coverage
         run: coverage report -m --omit="/usr/*,/home/runner/.local/*" --fail-under=100
+      - name: test local deployment
+        run: ./scripts/deploy_locally.sh
